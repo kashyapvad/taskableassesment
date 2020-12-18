@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class CustomerFactory {
 
-    public static Order customerBuilder(Integer id, String firstName, String lastName, String address, Set<String> memberships, Map<String, List<Integer>> physicalItemsBought) throws NullParameterException, BadParameterException {
+    public static Customer customerBuilder(Integer id, String firstName, String lastName, String address, Set<String> memberships, Map<String, List<Integer>> physicalItemsBought) throws NullParameterException, BadParameterException {
 
         CustomerImpl customer = new CustomerImpl(id, firstName, lastName, address, memberships, physicalItemsBought);
         return customer;

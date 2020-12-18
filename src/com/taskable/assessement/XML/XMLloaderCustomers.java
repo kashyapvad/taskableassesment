@@ -1,15 +1,12 @@
 package com.taskable.assessement.XML;
 
 
-import com.taskable.assessement.customers.Order;
+import com.taskable.assessement.customers.Customer;
 import com.taskable.assessement.customers.CustomerFactory;
 import com.taskable.assessement.exceptions.BadParameterException;
 import com.taskable.assessement.exceptions.InvalidItemInXMLException;
 import com.taskable.assessement.exceptions.NullParameterException;
-import com.taskable.assessement.items.Item;
 import com.taskable.assessement.items.ItemCatalog;
-import com.taskable.assessement.items.ItemFactory;
-import com.taskable.assessement.orders.OrderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -25,8 +22,8 @@ import java.util.*;
 
 public class XMLloaderCustomers {
 
-    public List<Order> getCustomerDataFromXML(String filename) throws NullParameterException, BadParameterException {
-        List<Order> data = new ArrayList<>();
+    public List<Customer> getCustomerDataFromXML(String filename) throws NullParameterException, BadParameterException {
+        List<Customer> data = new ArrayList<>();
         File xmlFile = new File(filename);
         Document doc = null;
         try {

@@ -74,7 +74,7 @@ public class OrderImpl implements Order {
             if (id == null) {
                 throw new NullParameterException("Null value passed in for ItemID");
             }
-            if (type.length() > 1000) {
+            if (type.length() > 50) {
                 throw new BadParameterException("Bad value passed in for qunatity of item: " + type);
             }
         }

@@ -1,8 +1,5 @@
 package com.taskable.assessement.shipments;
 
-import com.taskable.assessement.XML.XMLloaderOrders;
-import com.taskable.assessement.customers.CustomerImpl;
-import com.taskable.assessement.customers.Order;
 import com.taskable.assessement.exceptions.BadParameterException;
 import com.taskable.assessement.exceptions.NullParameterException;
 

@@ -7,13 +7,9 @@ import com.taskable.assessement.exceptions.NullParameterException;
 import com.taskable.assessement.items.ItemCatalog;
 import com.taskable.assessement.shipments.ShipmentManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class OrderProcessor {
-    //private static List<LinkedHashMap<String, Object>> solutionList = new ArrayList<>();
-
     public static void orderProcessing() throws NullParameterException, BadParameterException {
         Order order = OrderManager.getInstance().getOrder();
         while (order != null) {
@@ -35,6 +31,9 @@ public class OrderProcessor {
                 Integer orderId = ((OrderImpl) order).getId();
                 String shipmentAddress = CustomerManager.getInstance().getAddress(customerId);
                 ShipmentManager.getInstance().generateShipment(customerId, orderId, shipmentAddress, order.getPhysicalItemIds());
+                for (Integer itemId: order.getPhysicalItemIds()) {
+                    CustomerManager.getInstance().addPhysicalItem(customerId, order.getType(itemId), itemId);
+                }
             }
             order = OrderManager.getInstance().getOrder();
         }

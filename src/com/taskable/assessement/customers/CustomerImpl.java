@@ -6,7 +6,7 @@ import com.taskable.assessement.items.ItemCatalog;
 
 import java.util.*;
 
-public class CustomerImpl implements Order {
+public class CustomerImpl implements Customer {
 
     private Integer id;
     private String firstName;

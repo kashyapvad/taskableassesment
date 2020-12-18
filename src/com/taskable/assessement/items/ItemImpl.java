@@ -3,9 +3,6 @@ package com.taskable.assessement.items;
 import com.taskable.assessement.exceptions.BadParameterException;
 import com.taskable.assessement.exceptions.NullParameterException;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 public class ItemImpl implements Item {
 
     private Integer id;
