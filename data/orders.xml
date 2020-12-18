@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Orders>
+    
+    <Order Id="1">
+        <OrderId>185601</OrderId>
+        <CustomerId>312431</CustomerId>
+        <Item> 
+             <Id>21342</Id>
+             <Type>Video Club Membership</Type>
+        </Item>
+    </Order>
+
+    <Order Id="2">
+        <OrderId>185602</OrderId>
+        <CustomerId>312431</CustomerId>
+        <Item>
+            <Id>21341</Id>
+            <Type>Book Club Membership</Type>
+        </Item>
+        <Item> 
+             <Id>21346</Id>
+             <Type>Book</Type>
+        </Item>
+        <Item>
+            <Id>21347</Id>
+            <Type>Book</Type>
+        </Item>
+        <Item>
+            <Id>21345</Id>
+            <Type>Video</Type>
+        </Item>
+    </Order>
+
+    <Order Id="3">
+        <OrderId>185603</OrderId>
+        <CustomerId>312432</CustomerId>
+        <Item>
+            <Id>21348</Id>
+            <Type>Book</Type>
+        </Item>
+        <Item>
+            <Id>21349</Id>
+            <Type>Book</Type>
+        </Item>
+    </Order>
+
+    <Order Id="4">
+        <OrderId>185604</OrderId>
+        <CustomerId>312433</CustomerId>
+        <Item>
+            <Id>21351</Id>
+            <Type>Video</Type>
+        </Item>
+        <Item>
+            <Id>21352</Id>
+            <Type>Video</Type>
+        </Item>
+    </Order>
+</Orders>
+
+
+
+

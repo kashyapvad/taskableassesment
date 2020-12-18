@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Customers>
+    <Customer Id="1">
+        <Id>312431</Id>
+        <FirstName>Matthew</FirstName>
+        <LastName>Johnson</LastName>
+        <Address>3318 N Summit Pointe Dr, Topanga, CA 90290, USA</Address>
+    </Customer>
+    <Customer Id="2">
+        <Id>312432</Id>
+        <FirstName>Tomasz</FirstName>
+        <LastName>Krakowiak</LastName>
+        <Address>240 Wawrzyszew, Renesansowa, Warsaw 46580, Poland</Address>
+        <Membership>
+            <Type>Book Club Membership</Type>
+        </Membership>
+    </Customer>
+    <Customer Id="3">
+        <Id>312433</Id>
+        <FirstName>Kashyap</FirstName>
+        <LastName>Vadrevu</LastName>
+        <Address>910 King St, San Francisco, CA 91458, USA</Address>
+        <Membership>
+            <Type>Book Club Membership</Type>
+        </Membership>
+        <Membership>
+            <Type>Video Club Membership</Type>
+        </Membership>
+        <Item>
+            <Type>Video</Type>
+            <ItemId>21343</ItemId>
+        </Item>
+        <Item>
+            <Type>Video</Type>
+            <ItemId>21344</ItemId>
+        </Item>
+        <Item>
+            <Type>Book</Type>
+            <ItemId>21348</ItemId>
+        </Item>
+    </Customer>
+</Customers>
+

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Items>
+     <Item Id="1">
+          <Id>21341</Id>
+          <Name>Book Club Membership</Name>
+          <Type>Membership</Type>
+          <Price>50</Price>
+     </Item>
+     <Item Id="2">
+          <Id>21342</Id>
+          <Name>Video Club Membership</Name>
+          <Type>Membership</Type>
+          <Price>80</Price>
+     </Item>
+     <Item Id="3">
+          <Id>21343</Id>
+          <Name>Mission Impossible 1</Name>
+          <Type>Video</Type>
+          <Price>4</Price>
+     </Item>
+     <Item Id="4">
+          <Id>21344</Id>
+          <Name>Mission Impossible 2</Name>
+          <Type>Video</Type>
+          <Price>9</Price>
+     </Item>
+     <Item Id="5">
+          <Id>21345</Id>
+          <Name>Mission Impossible 3</Name>
+          <Type>Video</Type>
+          <Price>9</Price>
+     </Item>
+     <Item Id="6">
+          <Id>21346</Id>
+          <Name>Harry Potter and the Sorcerer's Stone</Name>
+          <Type>Book</Type>
+          <Price>9</Price>
+     </Item>
+     <Item Id="7">
+          <Id>21347</Id>
+          <Name>Harry Potter and the Chamber of Secrets</Name>
+          <Type>Book</Type>
+          <Price>9</Price>
+     </Item>
+     <Item Id="8">
+          <Id>21348</Id>
+          <Name>Harry Potter and the Prisoner of Azkaban</Name>
+          <Type>Book</Type>
+          <Price>19</Price>
+     </Item>
+     <Item Id="9">
+          <Id>21349</Id>
+          <Name>Harry Potter and the Goblet of Fire</Name>
+          <Type>Book</Type>
+          <Price>19</Price>
+     </Item>
+     <Item Id="10">
+          <Id>21350</Id>
+          <Name>Transformers</Name>
+          <Type>Video</Type>
+          <Price>9</Price>
+     </Item>
+     <Item Id="11">
+          <Id>21351</Id>
+          <Name>Tenet</Name>
+          <Type>Video</Type>
+          <Price>19</Price>
+     </Item>
+     <Item Id="12">
+          <Id>21352</Id>
+          <Name>Inception</Name>
+          <Type>Video</Type>
+          <Price>19</Price>
+     </Item>
+</Items>
+
