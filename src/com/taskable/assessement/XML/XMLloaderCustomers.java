@@ -97,7 +97,6 @@ public class XMLloaderCustomers {
             }
 
             String entryName = itemsList.item(k).getNodeName();
-            System.out.println(entryName);
             if (!entryName.equals("Item")) {
                 System.err.println("Unexpected node found: " + entryName);
             }
