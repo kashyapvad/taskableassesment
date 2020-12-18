@@ -68,41 +68,41 @@ public class XMLloaderOrders {
             Float totalPrice = 0f;
             Map<Integer, String> itemLine = new LinkedHashMap<>();
             NodeList orderItemList = orderElement.getElementsByTagName("Item");
-
-            for (int k = 0; k < orderItemList.getLength(); k++) {
-                if (orderItemList.item(k).getNodeType() == Node.TEXT_NODE) {
-                    continue;
-                }
-
-                entryName = orderItemList.item(k).getNodeName();
-                if (!entryName.equals("Item")) {
-                    System.err.println("Unexpected node found: " + entryName);
-                    return null;
-                }
-
-                Element orderItemElement = (Element) orderItemList.item(k);
-
-                String itemIdContent = orderItemElement.getElementsByTagName("Id").item(0).getTextContent();
-                String type = orderItemElement.getElementsByTagName("Type").item(0).getTextContent();
-                int itemId = Integer.parseInt(itemIdContent);
-                try {
-                    if (ItemCatalog.getInstance().getIdSet().contains(itemId))
-                        itemLine.put(itemId, type);
-                    else throw new InvalidItemInXMLException();
-                } catch (InvalidItemInXMLException e) {
-                    e.invalidItemInXML("The Item ID " + id + " in the order with Order ID " + itemIdContent + " does not Exist");
-                    e.printStackTrace();
-                }
-            }
-
+            addItemLine(orderItemList, itemLine, id, totalPrice);
             for (Map.Entry<Integer, String> entry : itemLine.entrySet()) {
                 totalPrice += ItemCatalog.getInstance().getPrice(entry.getKey());
             }
-
             data.add(OrderFactory.orderBuilder(id, totalPrice, customerId, itemLine));
         }
 
         return data;
+    }
+
+    public static void addItemLine(NodeList orderItemList, Map<Integer, String> itemLine, Integer id, Float totalPrice) {
+        for (int k = 0; k < orderItemList.getLength(); k++) {
+            if (orderItemList.item(k).getNodeType() == Node.TEXT_NODE) {
+                continue;
+            }
+
+            String entryName = orderItemList.item(k).getNodeName();
+            if (!entryName.equals("Item")) {
+                System.err.println("Unexpected node found: " + entryName);
+            }
+
+            Element orderItemElement = (Element) orderItemList.item(k);
+
+            String itemIdContent = orderItemElement.getElementsByTagName("Id").item(0).getTextContent();
+            String type = orderItemElement.getElementsByTagName("Type").item(0).getTextContent();
+            int itemId = Integer.parseInt(itemIdContent);
+            try {
+                if (ItemCatalog.getInstance().getIdSet().contains(itemId))
+                    itemLine.put(itemId, type);
+                else throw new InvalidItemInXMLException();
+            } catch (InvalidItemInXMLException e) {
+                e.invalidItemInXML("The Item ID " + id + " in the order with Order ID " + itemIdContent + " does not Exist");
+                e.printStackTrace();
+            }
+        }
     }
 }
 

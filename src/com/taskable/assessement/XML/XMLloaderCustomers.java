@@ -57,72 +57,78 @@ public class XMLloaderCustomers {
             Map<String, List<Integer>> physicalItemsBought = new LinkedHashMap<>();
             NodeList membershipList = customerElement.getElementsByTagName("Membership");
             NodeList itemsList = customerElement.getElementsByTagName("Item");
-            for (int k = 0; k < membershipList.getLength(); k++) {
-                if (membershipList.item(k).getNodeType() == Node.TEXT_NODE) {
-                    continue;
-                }
 
-                entryName = membershipList.item(k).getNodeName();
-                if (!entryName.equals("Membership")) {
-                    System.err.println("Unexpected node found: " + entryName);
-                    return null;
-                }
-
-                Element membershipElement = (Element) membershipList.item(k);
-
-                String membershipType = membershipElement.getElementsByTagName("Type").item(0).getTextContent();
-                try {
-                    if (ItemCatalog.getInstance().getMembershipTypes().contains(membershipType))
-                        memberships.add(membershipType);
-                    else throw new InvalidItemInXMLException();
-                } catch (InvalidItemInXMLException e) {
-                    e.invalidItemInXML("The Membership Type " + membershipType + " provided for the customer " + name + " is Invalid");
-                    e.printStackTrace();
-                }
-            }
-
-            for (int k = 0; k < itemsList.getLength(); k++) {
-                if (itemsList.item(k).getNodeType() == Node.TEXT_NODE) {
-                    continue;
-                }
-
-                entryName = itemsList.item(k).getNodeName();
-                if (!entryName.equals("Item")) {
-                    System.err.println("Unexpected node found: " + entryName);
-                    return null;
-                }
-
-                Element itemElement = (Element) itemsList.item(k);
-
-                String itemType = itemElement.getElementsByTagName("Type").item(0).getTextContent();
-                String itemIdContent = itemElement.getElementsByTagName("ItemId").item(0).getTextContent();
-                Integer itemId = Integer.parseInt(itemIdContent);
-                try {
-                    if (ItemCatalog.getInstance().getPhysicalProductTypes().contains(itemType)) {
-                        try {
-                            if (ItemCatalog.getInstance().getIdSet().contains(itemId)) {
-                                if (physicalItemsBought.keySet().contains(itemType)) {
-                                    physicalItemsBought.get(itemType).add(itemId);
-                                } else {
-                                    List<Integer> itemIds = new ArrayList<>();
-                                    itemIds.add(itemId);
-                                    physicalItemsBought.put(itemType, itemIds);
-                                }
-                            } else throw new InvalidItemInXMLException();
-                        } catch (InvalidItemInXMLException e) {
-                            e.invalidItemInXML("The Item id " + itemId + " is Invalid");
-                            e.printStackTrace();
-                        }
-                    } else throw new InvalidItemInXMLException();
-                } catch (InvalidItemInXMLException e) {
-                    e.invalidItemInXML("The Membership Type " + itemType + " provided for the customer " + name + " is Invalid");
-                    e.printStackTrace();
-                }
-            }
-
+            addMemberships(membershipList, memberships, name);
+            addPhysicalItemsBought(itemsList, physicalItemsBought, name);
             data.add(CustomerFactory.customerBuilder(id, firstName, lastName, address, memberships, physicalItemsBought));
         }
         return data;
+    }
+
+    public static void addMemberships(NodeList membershipList, Set<String> memberships, String name){
+        for (int k = 0; k < membershipList.getLength(); k++) {
+            if (membershipList.item(k).getNodeType() == Node.TEXT_NODE) {
+                continue;
+            }
+
+            String entryName = membershipList.item(k).getNodeName();
+            if (!entryName.equals("Membership")) {
+                System.err.println("Unexpected node found: " + entryName);
+            }
+
+            Element membershipElement = (Element) membershipList.item(k);
+
+            String membershipType = membershipElement.getElementsByTagName("Type").item(0).getTextContent();
+            try {
+                if (ItemCatalog.getInstance().getMembershipTypes().contains(membershipType))
+                    memberships.add(membershipType);
+                else throw new InvalidItemInXMLException();
+            } catch (InvalidItemInXMLException e) {
+                e.invalidItemInXML("The Membership Type " + membershipType + " provided for the customer " + name + " is Invalid");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void addPhysicalItemsBought(NodeList itemsList, Map<String, List<Integer>> physicalItemsBought, String name) {
+        for (int k = 0; k < itemsList.getLength(); k++) {
+            if (itemsList.item(k).getNodeType() == Node.TEXT_NODE) {
+                continue;
+            }
+
+            String entryName = itemsList.item(k).getNodeName();
+            System.out.println(entryName);
+            if (!entryName.equals("Item")) {
+                System.err.println("Unexpected node found: " + entryName);
+            }
+
+            Element itemElement = (Element) itemsList.item(k);
+
+            String itemType = itemElement.getElementsByTagName("Type").item(0).getTextContent();
+            String itemIdContent = itemElement.getElementsByTagName("ItemId").item(0).getTextContent();
+            Integer itemId = Integer.parseInt(itemIdContent);
+            try {
+                if (ItemCatalog.getInstance().getPhysicalProductTypes().contains(itemType)) {
+                    try {
+                        if (ItemCatalog.getInstance().getIdSet().contains(itemId)) {
+                            if (physicalItemsBought.keySet().contains(itemType)) {
+                                physicalItemsBought.get(itemType).add(itemId);
+                            } else {
+                                List<Integer> itemIds = new ArrayList<>();
+                                itemIds.add(itemId);
+                                physicalItemsBought.put(itemType, itemIds);
+                            }
+                        } else throw new InvalidItemInXMLException();
+                    } catch (InvalidItemInXMLException e) {
+                        e.invalidItemInXML("The Item id " + itemId + " is Invalid");
+                        e.printStackTrace();
+                    }
+                } else throw new InvalidItemInXMLException();
+            } catch (InvalidItemInXMLException e) {
+                e.invalidItemInXML("The Membership Type " + itemType + " provided for the customer " + name + " is Invalid");
+                e.printStackTrace();
+            }
+        }
     }
 }
 
