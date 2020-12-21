@@ -25,19 +25,23 @@ public class OrderProcessor {
             Integer itemId = entry.getKey();
             try {
                 if (ItemCatalog.getInstance().getIdSet().contains(entry.getKey())) {
-                    // Business Rule 1
-                    if (order.isMembershipItem(itemId)) {
-                        processMembershipItem(order, itemId);
-                    }
-                    // Business Rule 2
-                    if (order.getPhysicalItemIds().contains(itemId)) {
-                        processPhysicalItem(order, itemId);
-                    }
+                    applyRule(order, itemId);
                 } else throw new InvalidItemInXMLException();
             } catch (InvalidItemInXMLException e) {
                 e.invalidItemInXML("The Item ID " + entry.getKey() + " in the Order of Order ID " + ((OrderImpl) order).getId() + " is Invalid");
                 e.printStackTrace();
             }
+        }
+    }
+
+    private static void applyRule(Order order, Integer itemId){
+        // Business Rule 1
+        if (order.isMembershipItem(itemId)) {
+            processMembershipItem(order, itemId);
+        }
+        // Business Rule 2
+        if (order.getPhysicalItemIds().contains(itemId)) {
+            processPhysicalItem(order, itemId);
         }
     }
 
