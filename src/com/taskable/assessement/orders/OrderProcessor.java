@@ -20,7 +20,7 @@ public class OrderProcessor {
         }
     }
 
-    private static void applyRules(Order order) throws NullParameterException, BadParameterException {
+    private static void applyRules(Order order) {
         for (Map.Entry<Integer, String> entry : ((OrderImpl) order).getItemLine().entrySet()) {
             Integer itemId = entry.getKey();
             try {

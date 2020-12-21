@@ -20,8 +20,6 @@ public class ShipmentManager {
         }
     }
 
-    public static final String FILENAME = "../taskableassesment/data/orders.xml";
-
     public static ShipmentManager getInstance() {
         return ourInstance;
     }
