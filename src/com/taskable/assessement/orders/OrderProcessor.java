@@ -24,7 +24,7 @@ public class OrderProcessor {
         for (Map.Entry<Integer, String> entry : ((OrderImpl) order).getItemLine().entrySet()) {
             Integer itemId = entry.getKey();
             try {
-                if (ItemCatalog.getInstance().getIdSet().contains(entry.getKey())) {
+                if (ItemCatalog.getInstance().getIdSet().contains(itemId)) {
                     applyMembershipItemRules(order, itemId);
                     applyPhysicalItemRules(order, itemId);
                 } else throw new InvalidItemInXMLException();
