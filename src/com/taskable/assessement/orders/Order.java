@@ -9,4 +9,5 @@ public interface Order {
 
     String getType(Integer id);
 
+    void addShipments(Integer itemId);
 }

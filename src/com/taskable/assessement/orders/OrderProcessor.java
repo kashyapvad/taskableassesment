@@ -10,36 +10,38 @@ import com.taskable.assessement.shipments.ShipmentManager;
 import java.util.Map;
 
 public class OrderProcessor {
+
     public static void orderProcessing() throws NullParameterException, BadParameterException {
         Order order = OrderManager.getInstance().getOrder();
         while (order != null) {
-            for (Map.Entry<Integer, String> entry : ((OrderImpl) order).getItemLine().entrySet()) {
-                Integer itemId = entry.getKey();
-                try {
-                    if (ItemCatalog.getInstance().getIdSet().contains(entry.getKey())) {
-                        if (order.isMembershipItem(itemId)) {
-                            processMembershipItem(order, itemId);
-                        }
-                    } else throw new InvalidItemInXMLException();
-                } catch (InvalidItemInXMLException e) {
-                    e.invalidItemInXML("The Item ID " + entry.getKey() + " in the Order of Order ID " + ((OrderImpl) order).getId() + " is Invalid");
-                    e.printStackTrace();
-                }
-            }
-            if(!order.getPhysicalItemIds().isEmpty()) {
-                Integer customerId = ((OrderImpl) order).getCustomerId();
-                Integer orderId = ((OrderImpl) order).getId();
-                String shipmentAddress = CustomerManager.getInstance().getAddress(customerId);
-                ShipmentManager.getInstance().generateShipment(customerId, orderId, shipmentAddress, order.getPhysicalItemIds());
-                for (Integer itemId: order.getPhysicalItemIds()) {
-                    CustomerManager.getInstance().addPhysicalItem(customerId, order.getType(itemId), itemId);
-                }
-            }
+            applyRules(order);
             order = OrderManager.getInstance().getOrder();
         }
     }
 
-    private static void processMembershipItem(Order order, Integer id) throws NullParameterException, BadParameterException {
+    private static void applyRules(Order order) throws NullParameterException, BadParameterException {
+        for (Map.Entry<Integer, String> entry : ((OrderImpl) order).getItemLine().entrySet()) {
+            Integer itemId = entry.getKey();
+            try {
+                if (ItemCatalog.getInstance().getIdSet().contains(entry.getKey())) {
+                    // Business Rule 1
+                    if (order.isMembershipItem(itemId)) {
+                        processMembershipItem(order, itemId);
+                    }
+                    // Business Rule 2
+                    if (order.getPhysicalItemIds().contains(itemId)) {
+                        processPhysicalItem(order, itemId);
+                    }
+                } else throw new InvalidItemInXMLException();
+            } catch (InvalidItemInXMLException e) {
+                e.invalidItemInXML("The Item ID " + entry.getKey() + " in the Order of Order ID " + ((OrderImpl) order).getId() + " is Invalid");
+                e.printStackTrace();
+            }
+        }
+        generateShipmentSlip(order);
+    }
+
+    private static void processMembershipItem(Order order, Integer id) {
         Integer customerId = ((OrderImpl) order).getCustomerId();
         String membership = order.getType(id);
         try {
@@ -49,6 +51,21 @@ public class OrderProcessor {
         } catch (InvalidItemInXMLException e) {
             e.invalidItemInXML("The Customer with ID " + customerId + " already has " + membership);
             e.printStackTrace();
+        }
+    }
+
+    private static void processPhysicalItem(Order order, Integer itemId) {
+        Integer customerId = ((OrderImpl) order).getCustomerId();
+        order.addShipments(itemId);
+        CustomerManager.getInstance().addPhysicalItem(customerId, order.getType(itemId), itemId);
+    }
+
+    private static void generateShipmentSlip(Order order) throws NullParameterException, BadParameterException {
+        if (!order.getPhysicalItemIds().isEmpty()) {
+            Integer customerId = ((OrderImpl) order).getCustomerId();
+            Integer orderId = ((OrderImpl) order).getId();
+            String shipmentAddress = CustomerManager.getInstance().getAddress(customerId);
+            ShipmentManager.getInstance().generateShipment(customerId, orderId, shipmentAddress, ((OrderImpl) order).getShipmentList());
         }
     }
 }

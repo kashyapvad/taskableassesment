@@ -12,6 +12,7 @@ public class OrderImpl implements Order {
     private Float totalPrice;
     private Integer customerId;
     private Map<Integer, String> itemLine = new HashMap<>();
+    private List<Integer> shipmentList = new ArrayList<>();
 
     public OrderImpl(Integer orderId, Float totalPrice, Integer customerId, Map<Integer, String> itemLine) throws NullParameterException, BadParameterException {
 
@@ -35,6 +36,10 @@ public class OrderImpl implements Order {
 
     public Map<Integer, String> getItemLine() {
         return itemLine;
+    }
+
+    public List<Integer> getShipmentList() {
+        return shipmentList;
     }
 
     public void setId(Integer id) throws BadParameterException, NullParameterException {
@@ -79,6 +84,14 @@ public class OrderImpl implements Order {
             }
         }
         this.itemLine = itemLine;
+    }
+
+    public void setShipmentList(List<Integer> shipmentList) {
+        this.shipmentList = shipmentList;
+    }
+
+    public void addShipments(Integer itemId){
+        this.shipmentList.add(itemId);
     }
 
     public List<Integer> getPhysicalItemIds() {
