@@ -15,6 +15,7 @@ public class OrderProcessor {
         Order order = OrderManager.getInstance().getOrder();
         while (order != null) {
             applyRules(order);
+            generateShipmentSlip(order);
             order = OrderManager.getInstance().getOrder();
         }
     }
@@ -38,7 +39,6 @@ public class OrderProcessor {
                 e.printStackTrace();
             }
         }
-        generateShipmentSlip(order);
     }
 
     private static void processMembershipItem(Order order, Integer id) {
