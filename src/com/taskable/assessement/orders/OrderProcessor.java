@@ -2,12 +2,8 @@ package com.taskable.assessement.orders;
 
 import com.taskable.assessement.customers.CustomerManager;
 import com.taskable.assessement.exceptions.BadParameterException;
-import com.taskable.assessement.exceptions.InvalidItemInXMLException;
 import com.taskable.assessement.exceptions.NullParameterException;
-import com.taskable.assessement.items.ItemCatalog;
 import com.taskable.assessement.shipments.ShipmentManager;
-
-import java.util.Map;
 
 public class OrderProcessor {
 
