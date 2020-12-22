@@ -29,7 +29,7 @@ public class RulesManager {
     }
 
     private RulesManager() throws NullParameterException, BadParameterException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        for (String ruleClass : Constants.RuleClasses) {
+        for (String ruleClass : Constants.RULE_CLASSES) {
             Class<?> c = Class.forName(ruleClass);
             Constructor<?> cons = c.getConstructor();
             Rule rule = (Rule) cons.newInstance();

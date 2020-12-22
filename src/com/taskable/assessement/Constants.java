@@ -8,7 +8,7 @@ public final class Constants {
 
     private Constants() {}
 
-    public static final List<String> RuleClasses = Collections.unmodifiableList(
+    public static final List<String> RULE_CLASSES = Collections.unmodifiableList(
             new ArrayList<>() {{
                 add("com.taskable.assessement.rules.MembershipRule");
                 add("com.taskable.assessement.rules.PhysicalItemRule");
