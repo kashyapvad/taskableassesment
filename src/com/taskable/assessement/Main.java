@@ -8,7 +8,7 @@ import com.taskable.assessement.shipments.ShipmentManager;
 
 public class Main {
 
-    public static void main(String[] args) throws NullParameterException, BadParameterException {
+    public static void main(String[] args) throws NullParameterException, BadParameterException, ClassNotFoundException {
         System.out.println("Customer's state before orders are processed");
         CustomerManager.getInstance().printReport();
         System.out.println("==================================================");

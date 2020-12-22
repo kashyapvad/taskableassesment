@@ -45,9 +45,9 @@ public class OrderManager {
         }
     }
 
-    public com.taskable.assessement.orders.Order getOrder() {
+    public Order getOrder() {
         if (orderList.size() >= 1) {
-            com.taskable.assessement.orders.Order order = orderList.get(0);
+            Order order = orderList.get(0);
             orderList.remove(order);
             return order;
         } else return null;
