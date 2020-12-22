@@ -5,7 +5,6 @@ import com.taskable.assessement.exceptions.BadParameterException;
 import com.taskable.assessement.exceptions.NullParameterException;
 
 import java.util.List;
-import java.util.Map;
 
 public class ShipmentFactory {
 
